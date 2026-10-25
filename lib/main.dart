@@ -58,7 +58,7 @@ class PolarisApp extends StatelessWidget {
         ),
         useMaterial3: true,
         fontFamily: '.SF Pro Text',
-        cardTheme: CardTheme(
+        cardTheme: CardThemeData(
           color: PolarisColors.surface,
           elevation: 0,
           shape: RoundedRectangleBorder(
