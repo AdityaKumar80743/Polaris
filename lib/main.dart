@@ -428,16 +428,16 @@ class _PolarisShellState extends State<PolarisShell> {
   int _targetCal = 2500;
   int _targetCarb = 250;
   int _targetProt = 160;
-  int _targetFiber = 35;
+  final int _targetFiber = 35;
   int _targetFat = 75;
 
   // Biometric Planner Inputs
-  int _age = 25;
-  int _heightCm = 178;
-  int _weightKg = 74;
-  String _gender = 'male';
-  double _activityFactor = 1.55;
-  String _goal = 'leangain'; // 'loss', 'maintain', 'leangain', 'gain'
+  final int _age = 25;
+  final int _heightCm = 178;
+  final int _weightKg = 74;
+  final String _gender = 'male';
+  final double _activityFactor = 1.55;
+  final String _goal = 'leangain'; // 'loss', 'maintain', 'leangain', 'gain'
 
   List<LoggedMeal> _meals = [];
   List<ExpenseCategory> _expenseCategories = [];
@@ -1302,7 +1302,7 @@ class _PolarisShellState extends State<PolarisShell> {
                       contentPadding: EdgeInsets.zero,
                       title: const Text('Assign Deadline', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
                       value: hasDeadline,
-                      activeColor: PolarisColors.blue,
+                      activeThumbColor: PolarisColors.blue,
                       onChanged: (v) => setLocalState(() => hasDeadline = v),
                     ),
                     const SizedBox(height: 12),
@@ -1496,6 +1496,8 @@ class _PolarisShellState extends State<PolarisShell> {
                     _macroBarRow('Carbs', _totalCarbConsumed, _targetCarb, PolarisColors.blue),
                     const SizedBox(height: 8),
                     _macroBarRow('Fiber', _totalFiberConsumed, _targetFiber, PolarisColors.amber),
+                    const SizedBox(height: 8),
+                    _macroBarRow('Fat', _totalFatConsumed, _targetFat, PolarisColors.purple),
                   ],
                 ),
               ),
@@ -1509,7 +1511,7 @@ class _PolarisShellState extends State<PolarisShell> {
                     const Text('Auto-Calculate Food Macros', style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700)),
                     const SizedBox(height: 10),
                     DropdownButtonFormField<FoodItemRef>(
-                      value: selectedFood,
+                      initialValue: selectedFood,
                       dropdownColor: PolarisColors.surfaceElevated,
                       items: foodCatalog.map((f) => DropdownMenuItem(value: f, child: Text(f.name, style: const TextStyle(fontSize: 13)))).toList(),
                       onChanged: (v) {
@@ -1718,7 +1720,7 @@ class _PolarisShellState extends State<PolarisShell> {
                   ),
                   const SizedBox(height: 10),
                   DropdownButtonFormField<String>(
-                    value: selectedCategory,
+                    initialValue: selectedCategory,
                     dropdownColor: PolarisColors.surfaceElevated,
                     items: _expenseCategories.map((c) => DropdownMenuItem(value: c.name, child: Text('${c.icon} ${c.name}'))).toList(),
                     onChanged: (v) {
